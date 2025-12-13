@@ -34,7 +34,7 @@ export const data = new SlashCommandBuilder()
   .addSubcommand(subcommand =>
     subcommand
       .setName('all')
-      .setDescription('View all unpaid ledger entries (Officer only)')
+      .setDescription('View all unpaid ledger entries')
   )
   .addSubcommand(subcommand =>
     subcommand

@@ -8,7 +8,7 @@ A friendly Discord bot for tracking consumable reimbursement ledger entries for 
 
 - **`/ledger add`** - Add a new consumable reimbursement entry 📝
 - **`/ledger my`** - View your unpaid ledger entries 👀
-- **`/ledger all`** - View all unpaid entries grouped by raider (Officer only) 📊
+- **`/ledger all`** - View all unpaid entries grouped by raider 📊
 - **`/ledger pay`** - Mark an entry as paid (Officer only) ✅
 
 ## 🎯 Role Permissions
@@ -36,18 +36,19 @@ A friendly Discord bot for tracking consumable reimbursement ledger entries for 
    ```bash
    npm install
    ```
-4. **Initialize the database**
+
+3. **Initialize the database**
    ```bash
    npx prisma migrate dev --name init
    npx prisma generate
    ```
 
-5. **Register slash commands**
+4. **Register slash commands**
    ```bash
    npm run register
    ```
 
-6. **Start the bot**
+5. **Start the bot**
    
    Development mode (with hot reload):
    ```bash
