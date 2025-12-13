@@ -2,7 +2,7 @@
 
 A friendly Discord bot for tracking consumable reimbursement ledger entries for World of Warcraft guilds! Built with Node.js, TypeScript, discord.js v14, and Prisma with SQLite.
 
-> 💡 **Made with Cursor Composer 1**
+> 💡 **Made with Cursor Composer 1 and hosted by Railway**
 
 ## ✨ Features
 
