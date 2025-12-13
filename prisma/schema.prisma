@@ -1,0 +1,30 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Raider {
+  id        Int           @id @default(autoincrement())
+  discordId String        @unique
+  name      String
+  entries   LedgerEntry[]
+}
+
+model LedgerEntry {
+  id          Int       @id @default(autoincrement())
+  raider      Raider    @relation(fields: [raiderId], references: [id])
+  raiderId    Int
+  item        String
+  goldSpent   Int
+  paid        Boolean   @default(false)
+  dateCreated DateTime  @default(now())
+  datePaid    DateTime?
+}
+
