@@ -2,6 +2,8 @@
 
 A friendly Discord bot for **Doki Doki Kawaii Club** - your WoW guild management companion! Track consumable reimbursements and BoE sales with ease.
 
+> 💡 **Made with Cursor Composer 1 and hosted by Railway**
+
 ## ✨ Features
 
 ### 🧪 Consumable Reimbursements
