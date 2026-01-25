@@ -3,6 +3,7 @@ import { PrismaClient } from '@prisma/client';
 import * as dotenv from 'dotenv';
 import * as fs from 'fs';
 import * as path from 'path';
+import { startBirthdayScheduler } from './utils/birthdayScheduler';
 
 // Load environment variables
 dotenv.config();
@@ -33,7 +34,7 @@ export const OFFICER_ROLE_IDS: string[] = process.env.OFFICER_ROLE_IDS
 
 // Create Discord client
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMembers],
 });
 
 // Initialize commands collection
@@ -96,6 +97,9 @@ client.on(Events.InteractionCreate, async (interaction: Interaction) => {
 client.once(Events.ClientReady, (readyClient) => {
   console.log(`🤖 Bot is ready! Logged in as ${readyClient.user.tag}`);
   console.log(`📊 Serving ${readyClient.guilds.cache.size} guild(s)`);
+  
+  // Start the birthday scheduler
+  startBirthdayScheduler(client, prisma);
 });
 
 // Main startup function

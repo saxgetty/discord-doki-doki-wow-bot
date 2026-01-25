@@ -46,3 +46,14 @@ model BoE {
   notes         String?
 }
 
+// Birthday tracking for auto-posting birthday wishes
+model Birthday {
+  id            Int       @id @default(autoincrement())
+  discordId     String    @unique // Discord user ID
+  month         Int       // 1-12
+  day           Int       // 1-31
+  timezone      String    // IANA timezone (e.g., "America/New_York")
+  lastWishedYear Int?     // Year we last wished them (to avoid duplicate wishes)
+  createdAt     DateTime  @default(now())
+}
+

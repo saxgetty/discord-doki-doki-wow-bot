@@ -25,6 +25,19 @@ Neg - [H] Plate Helmet - 1,500,000g SOLD - 300k PAID - 1.2M GUILD
 - `/boe pay` - Mark player as paid *(Officer only)*
 - `/boe delete` - Remove entry *(Officer only)*
 
+### 🎂 Birthday Announcements
+Automatic birthday wishes posted at 9 AM in each user's local timezone!
+
+- `/birthday list` - View all registered birthdays
+- `/birthday next` - See the next 5 upcoming birthdays
+- `/birthday add` - Add a birthday *(Admin only)*
+- `/birthday remove` - Remove a birthday *(Admin only)*
+
+**Features:**
+- Timezone-aware posting (PST, CST, EST, GMT, CET, MST)
+- Automatically skips users who have left the server
+- Only posts once per year per person
+
 ### ❓ Help
 - `/help` - Display all available commands
 
@@ -40,6 +53,7 @@ Neg - [H] Plate Helmet - 1,500,000g SOLD - 300k PAID - 1.2M GUILD
 - Node.js (v18 or later LTS recommended)
 - npm or yarn
 - A Discord Bot Token ([Discord Developer Portal](https://discord.com/developers/applications))
+- **Server Members Intent** enabled (required for birthday feature to check if users are still in the server)
 
 ### Installation
 
@@ -81,6 +95,7 @@ Neg - [H] Plate Helmet - 1,500,000g SOLD - 300k PAID - 1.2M GUILD
 | `npm run build` | Compile TypeScript |
 | `npm start` | Production mode |
 | `npm run register` | Register slash commands |
+| `npm run seed:birthdays` | Seed initial birthday data |
 
 ## 💾 Database
 
