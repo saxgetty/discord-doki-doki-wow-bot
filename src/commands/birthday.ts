@@ -162,7 +162,6 @@ async function handleAdd(
   if (day > daysInMonth) {
     await interaction.reply({
       content: `❌ Invalid day. ${getMonthName(month)} only has ${daysInMonth} days.`,
-      ephemeral: true,
     });
     return;
   }
@@ -175,7 +174,6 @@ async function handleAdd(
   if (existing) {
     await interaction.reply({
       content: `❌ ${user.username} already has a birthday set (${getMonthName(existing.month)} ${existing.day}). Use \`/birthday remove\` first if you want to change it.`,
-      ephemeral: true,
     });
     return;
   }
@@ -192,7 +190,6 @@ async function handleAdd(
 
   await interaction.reply({
     content: `✅ Added birthday for ${user.username}: **${getMonthName(month)} ${day}** (${getTimezoneDisplay(timezone)})`,
-    ephemeral: true,
   });
 }
 
@@ -217,7 +214,6 @@ async function handleRemove(
   if (!existing) {
     await interaction.reply({
       content: `❌ ${user.username} doesn't have a birthday set.`,
-      ephemeral: true,
     });
     return;
   }
@@ -228,7 +224,6 @@ async function handleRemove(
 
   await interaction.reply({
     content: `✅ Removed birthday for ${user.username}`,
-    ephemeral: true,
   });
 }
 
@@ -243,7 +238,6 @@ async function handleList(
   if (birthdays.length === 0) {
     await interaction.reply({
       content: '📅 No birthdays have been added yet.',
-      ephemeral: true,
     });
     return;
   }
@@ -258,7 +252,7 @@ async function handleList(
     )
     .setFooter({ text: `${birthdays.length} birthdays registered` });
 
-  await interaction.reply({ embeds: [embed], ephemeral: true });
+  await interaction.reply({ embeds: [embed] });
 }
 
 async function handleNext(
@@ -270,7 +264,6 @@ async function handleNext(
   if (birthdays.length === 0) {
     await interaction.reply({
       content: '📅 No birthdays have been added yet.',
-      ephemeral: true,
     });
     return;
   }
@@ -312,5 +305,5 @@ async function handleNext(
         .join('\n')
     );
 
-  await interaction.reply({ embeds: [embed], ephemeral: true });
+  await interaction.reply({ embeds: [embed] });
 }
