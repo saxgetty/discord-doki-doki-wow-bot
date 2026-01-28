@@ -37,6 +37,7 @@ Automatic birthday wishes posted at **midnight** in each user's local timezone!
 **Features:**
 - Timezone-aware posting (AKST, PST, MST, AZ, CST, EST, BRT, GMT, CET)
 - Posts at midnight in user's local time
+- Assigns a special birthday role for the day (auto-removed when birthday ends)
 - Automatically skips users who have left the server
 - Only posts once per year per person
 
@@ -78,6 +79,7 @@ Automatic birthday wishes posted at **midnight** in each user's local timezone!
    CONSUMABLES_ROLE_ID=your_consumables_role_id
    VETERAN_ROLE_ID=your_veteran_role_id
    BIRTHDAY_CHANNEL_ID=your_birthday_channel_id
+   BIRTHDAY_ROLE_ID=your_birthday_role_id
    DATABASE_URL="file:./dev.db"
    ```
 
