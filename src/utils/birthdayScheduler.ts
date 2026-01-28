@@ -77,11 +77,26 @@ export async function checkBirthdays(client: Client, prisma: PrismaClient): Prom
           if (userFound) {
             // Post birthday message
             const messages = [
-              `🎂 Happy Birthday <@${birthday.discordId}>! 🎉 Hope you have an amazing day!`,
-              `🎈 It's <@${birthday.discordId}>'s birthday today! 🎂 Wishing you all the best!`,
-              `🥳 Happy Birthday <@${birthday.discordId}>! 🎁 May your day be filled with joy!`,
-              `🎉 Everyone wish <@${birthday.discordId}> a Happy Birthday! 🎂`,
-              `✨ Happy Birthday <@${birthday.discordId}>! 🎊 Have a fantastic day!`,
+              `🎂 Happy Birthday <@${birthday.discordId}>! You're not old, you're just well-seasoned!`,
+              `🎈 <@${birthday.discordId}> has leveled up IRL! +1 year, +10 wisdom, -5 metabolism`,
+              `🎉 Happy Birthday <@${birthday.discordId}>! You're officially vintage now 🍷`,
+              `✨ <@${birthday.discordId}> just hit a new personal record for staying alive! Congrats! 🏆`,
+              `🎂 Happy Birthday <@${birthday.discordId}>! Don't worry, you don't look a day over whatever age makes you feel good`,
+              `🎊 <@${birthday.discordId}> spawned into this world on this day! /played is getting concerning...`,
+              `🎈 It's <@${birthday.discordId}>'s birthday! May your repair bills be low and your parses be high! ⚔️`,
+              `🎂 <@${birthday.discordId}> is another year closer to becoming a raid boss! Happy Birthday!`,
+              `🎉 Happy Birthday <@${birthday.discordId}>! You've unlocked the achievement: [Survived Another Year]`,
+              `✨ <@${birthday.discordId}> has entered the chat... a year older! Happy Birthday!`,
+              `🥳 Happy Birthday <@${birthday.discordId}>! Remember: age is just a number... a really big number`,
+              `🎊 Ding! <@${birthday.discordId}> leveled up to Year ${new Date().getFullYear() - 1900}! (jk we don't know your age)`,
+              `🎂 Happy Birthday <@${birthday.discordId}>! May your pulls be legendary and your wipes be few! 🐉`,
+              `🎈 <@${birthday.discordId}> has been alive for another revolution around the sun! Achievement unlocked! 🌍`,
+              `🥳 Happy Birthday <@${birthday.discordId}>! You're not getting older, you're increasing in value!`,
+              `🎉 <@${birthday.discordId}> popped out of the character creation screen on this day! Happy Birthday!`,
+              `✨ Happy Birthday <@${birthday.discordId}>! Time to eat cake and pretend calories don't exist! 🍰`,
+              `🎂 <@${birthday.discordId}> is celebrating their annual respawn day! Happy Birthday!`,
+              `🥳 <@${birthday.discordId}>'s mom completed a mythic+ delivery on this day! Happy Birthday! 👶`,
+              `🎊 Happy Birthday <@${birthday.discordId}>! The loot gods smile upon you today... probably 🎰`,
             ];
             const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
