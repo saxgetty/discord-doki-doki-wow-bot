@@ -112,8 +112,8 @@ export async function checkBirthdays(client: Client, prisma: PrismaClient): Prom
                     await member.roles.add(BIRTHDAY_ROLE_ID);
                     console.log(`🎀 Added birthday role to ${birthday.discordId}`);
                   }
-                } catch {
-                  // User not in this guild
+                } catch (error) {
+                  console.error(`❌ Failed to add birthday role to ${birthday.discordId} in guild ${guild.id}:`, error);
                 }
               }
             }
