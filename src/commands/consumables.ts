@@ -47,6 +47,18 @@ export const data = new SlashCommandBuilder()
           .setRequired(true)
           .setMinValue(1)
       )
+  )
+  .addSubcommand(subcommand =>
+    subcommand
+      .setName('delete')
+      .setDescription('Delete a consumable entry (Officer only)')
+      .addIntegerOption(option =>
+        option
+          .setName('id')
+          .setDescription('The ID of the entry to delete')
+          .setRequired(true)
+          .setMinValue(1)
+      )
   );
 
 export async function execute(
@@ -67,6 +79,9 @@ export async function execute(
       break;
     case 'pay':
       await handlePay(interaction, prisma);
+      break;
+    case 'delete':
+      await handleDelete(interaction, prisma);
       break;
     default:
       await interaction.reply({
@@ -439,6 +454,63 @@ async function handlePay(
     console.error('Error marking entry as paid:', error);
     await interaction.reply({
       content: 'Failed to mark entry as paid. Please try again later.',
+      ephemeral: true,
+    });
+  }
+}
+
+// Handle /consumables delete
+async function handleDelete(
+  interaction: ChatInputCommandInteraction,
+  prisma: PrismaClient
+): Promise<void> {
+  if (!isOfficer(interaction)) {
+    await interaction.reply({
+      content: 'You do not have permission to use this command. Officer role required.',
+      ephemeral: true,
+    });
+    return;
+  }
+
+  const entryId = interaction.options.getInteger('id', true);
+
+  try {
+    const entry = await prisma.ledgerEntry.findUnique({
+      where: { id: entryId },
+      include: { raider: true },
+    });
+
+    if (!entry) {
+      await interaction.reply({
+        content: `Entry #${entryId} not found.`,
+        ephemeral: true,
+      });
+      return;
+    }
+
+    // Delete the entry
+    await prisma.ledgerEntry.delete({
+      where: { id: entryId },
+    });
+
+    const embed = new EmbedBuilder()
+      .setColor(0xff0000)
+      .setTitle('🗑️ Consumable Deleted')
+      .setDescription(`Entry #${entryId} has been deleted.`)
+      .setThumbnail(GOLD_ICON_URL)
+      .addFields(
+        { name: 'Raider', value: entry.raider.name, inline: true },
+        { name: 'Item', value: entry.item, inline: true },
+        { name: 'Gold', value: formatGold(entry.goldSpent), inline: true }
+      )
+      .setTimestamp()
+      .setFooter({ text: `Deleted by ${interaction.user.displayName || interaction.user.username}` });
+
+    await interaction.reply({ embeds: [embed] });
+  } catch (error) {
+    console.error('Error deleting consumable entry:', error);
+    await interaction.reply({
+      content: 'Failed to delete entry. Please try again later.',
       ephemeral: true,
     });
   }

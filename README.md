@@ -12,6 +12,7 @@ Track gold spent on raid consumables for reimbursement.
 - `/consumables my` - View your unpaid entries
 - `/consumables all` - View all unpaid entries *(Officer only)*
 - `/consumables pay` - Mark as paid *(Officer only)*
+- `/consumables delete` - Remove entry *(Officer only)*
 
 ### 📦 BoE Sales Tracking
 Track Bind on Equip items from raids with automatic **20% player / 80% guild** split!
