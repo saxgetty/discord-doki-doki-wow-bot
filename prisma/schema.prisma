@@ -23,7 +23,7 @@ model LedgerEntry {
   raider      Raider    @relation(fields: [raiderId], references: [id])
   raiderId    Int
   item        String
-  goldSpent   Int
+  goldSpent   BigInt
   paid        Boolean   @default(false)
   dateCreated DateTime  @default(now())
   datePaid    DateTime?
@@ -37,9 +37,9 @@ model BoE {
   difficulty    String    // N, H, M (Normal, Heroic, Mythic)
   looter        Raider    @relation("Looter", fields: [looterId], references: [id])
   looterId      Int
-  salePrice     Int       // Gold amount sold for
-  playerCut     Int       // 20% to player
-  guildCut      Int       // 80% to guild
+  salePrice     BigInt    // Gold amount sold for
+  playerCut     BigInt    // 50% to player
+  guildCut      BigInt    // 50% to guild
   paid          Boolean   @default(false) // Has player been paid?
   dateAdded     DateTime  @default(now())
   datePaid      DateTime?

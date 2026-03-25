@@ -7,11 +7,11 @@ import { PrismaClient } from '@prisma/client';
 
 export const data = new SlashCommandBuilder()
   .setName('boe')
-  .setDescription('Track guild BoE sales (20% player / 80% guild split)')
+  .setDescription('Track guild BoE sales (50% player / 50% guild split)')
   .addSubcommand(subcommand =>
     subcommand
       .setName('add')
-      .setDescription('Add a sold BoE (auto-calculates 20/80 split)')
+      .setDescription('Add a sold BoE (auto-calculates 50/50 split)')
       .addUserOption(option =>
         option
           .setName('looter')
@@ -187,7 +187,7 @@ function hasRequiredRole(interaction: ChatInputCommandInteraction): boolean {
 }
 
 // Format gold amount nicely (matches your style: 156,798g or 1.2M)
-function formatGold(gold: number): string {
+function formatGold(gold: number | bigint): string {
   if (gold >= 1000000) {
     const millions = gold / 1000000;
     return millions % 1 === 0 ? `${millions}M` : `${millions.toFixed(1)}M`;
@@ -229,8 +229,8 @@ async function handleAdd(
   const salePrice = interaction.options.getInteger('price', true);
   const notes = interaction.options.getString('notes');
 
-  // Calculate 20/80 split
-  const playerCut = Math.floor(salePrice * 0.2);
+  // Calculate 50/50 split
+  const playerCut = Math.floor(salePrice * 0.5);
   const guildCut = salePrice - playerCut;
 
   try {
@@ -274,8 +274,8 @@ async function handleAdd(
         `**${raider.name}** - [${difficulty}] ${itemDesc}${notesText} - ${formatGold(salePrice)} SOLD`
       )
       .addFields(
-        { name: 'Player Cut (20%)', value: formatGold(playerCut), inline: true },
-        { name: 'Guild Cut (80%)', value: formatGold(guildCut), inline: true },
+        { name: 'Player Cut (50%)', value: formatGold(playerCut), inline: true },
+        { name: 'Guild Cut (50%)', value: formatGold(guildCut), inline: true },
         { name: 'Entry ID', value: `#${boe.id}`, inline: true }
       )
       .setTimestamp()
@@ -329,8 +329,8 @@ async function handleList(
 
     // Build the list in your familiar format
     const lines: string[] = [];
-    let totalPlayerOwed = 0;
-    let totalGuildEarned = 0;
+    let totalPlayerOwed = 0n;
+    let totalGuildEarned = 0n;
 
     for (const boe of boes) {
       const itemDesc = boe.armorType === boe.slot ? boe.armorType : `${boe.armorType} ${boe.slot}`;

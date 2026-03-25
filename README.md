@@ -15,10 +15,10 @@ Track gold spent on raid consumables for reimbursement.
 - `/consumables delete` - Remove entry *(Officer only)*
 
 ### 📦 BoE Sales Tracking
-Track Bind on Equip items from raids with automatic **20% player / 80% guild** split!
+Track Bind on Equip items from raids with automatic **50% player / 50% guild** split!
 
 ```
-Neg - [H] Plate Helmet - 1,500,000g SOLD - 300k PAID - 1.2M GUILD
+Neg - [H] Plate Helmet - 1,500,000g SOLD - 750k Player - 750k Guild
 ```
 
 - `/boe add` - Record a sold BoE (auto-calculates split)

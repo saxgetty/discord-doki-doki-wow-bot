@@ -134,8 +134,8 @@ function hasRequiredRole(interaction: ChatInputCommandInteraction): boolean {
 const GOLD_ICON_URL = 'https://imgur.com/03nus3n.png';
 
 // Format gold amount nicely
-function formatGold(gold: number): string {
-  return `${gold.toLocaleString()}g`;
+function formatGold(gold: number | bigint): string {
+  return `${Number(gold).toLocaleString()}g`;
 }
 
 // Handle /consumables add
@@ -244,7 +244,7 @@ async function handleMy(
     }
 
     // Calculate total
-    const totalGold = raider.entries.reduce((sum, entry) => sum + entry.goldSpent, 0);
+    const totalGold = raider.entries.reduce((sum, entry) => sum + entry.goldSpent, 0n);
 
     // Build entries list
     const entriesList = raider.entries
@@ -321,8 +321,8 @@ async function handleAll(
     // Calculate grand total
     const grandTotal = raiders.reduce(
       (sum, raider) =>
-        sum + raider.entries.reduce((s, e) => s + e.goldSpent, 0),
-      0
+        sum + raider.entries.reduce((s, e) => s + e.goldSpent, 0n),
+      0n
     );
 
     const totalEntries = raiders.reduce((sum, r) => sum + r.entries.length, 0);
@@ -338,7 +338,7 @@ async function handleAll(
     let fieldCount = 0;
 
     for (const raider of raiders) {
-      const raiderTotal = raider.entries.reduce((sum, e) => sum + e.goldSpent, 0);
+      const raiderTotal = raider.entries.reduce((sum, e) => sum + e.goldSpent, 0n);
 
       const entriesText = raider.entries
         .map(entry => {
