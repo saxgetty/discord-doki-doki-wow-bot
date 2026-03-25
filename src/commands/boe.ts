@@ -188,11 +188,12 @@ function hasRequiredRole(interaction: ChatInputCommandInteraction): boolean {
 
 // Format gold amount nicely (matches your style: 156,798g or 1.2M)
 function formatGold(gold: number | bigint): string {
-  if (gold >= 1000000) {
-    const millions = gold / 1000000;
+  const num = Number(gold);
+  if (num >= 1000000) {
+    const millions = num / 1000000;
     return millions % 1 === 0 ? `${millions}M` : `${millions.toFixed(1)}M`;
   }
-  return `${gold.toLocaleString()}g`;
+  return `${num.toLocaleString()}g`;
 }
 
 // Get difficulty color (WoW item quality colors)
